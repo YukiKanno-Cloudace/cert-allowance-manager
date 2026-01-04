@@ -1,0 +1,339 @@
+/* ===================================
+   カラーテーマ定義（改善版）
+   落ち着いた色味、適切なコントラスト比、目に優しい配色
+   =================================== */
+
+/* 1. ライトモード（シンプル） */
+:root[data-theme="light"],
+:root[data-theme="default"] {
+    --primary-color: #5B7C99;
+    --secondary-color: #7D98B3;
+    --background-color: #F5F7FA;
+    --card-color: #FFFFFF;
+    --text-color: #2C3E50;
+    --text-secondary: #546E7A;
+    --text-muted: #90A4AE;
+    --border-color: #E0E5E9;
+    --gradient-start: #5B7C99;
+    --gradient-end: #7D98B3;
+    --alert-bg: #FFF3CD;
+    --alert-border: #FFC107;
+    --alert-text: #856404;
+    --alert-item-bg: #FFFFFF;
+}
+
+/* 2. ニュートラルグレー */
+:root[data-theme="neutral-gray"] {
+    --primary-color: #5F6368;
+    --secondary-color: #80868B;
+    --background-color: #F8F9FA;
+    --card-color: #FFFFFF;
+    --text-color: #202124;
+    --text-secondary: #5F6368;
+    --text-muted: #9AA0A6;
+    --border-color: #DADCE0;
+    --gradient-start: #5F6368;
+    --gradient-end: #80868B;
+    --alert-bg: #FFF3CD;
+    --alert-border: #FFC107;
+    --alert-text: #856404;
+    --alert-item-bg: #FFFFFF;
+}
+
+/* 3. ソフトブルー */
+:root[data-theme="soft-blue"] {
+    --primary-color: #4A6FA5;
+    --secondary-color: #6B89B8;
+    --background-color: #F0F4F8;
+    --card-color: #FFFFFF;
+    --text-color: #1E3A5F;
+    --text-secondary: #4A6FA5;
+    --text-muted: #8BA3C7;
+    --border-color: #D9E2EC;
+    --gradient-start: #4A6FA5;
+    --gradient-end: #6B89B8;
+    --alert-bg: #FFF3CD;
+    --alert-border: #FFC107;
+    --alert-text: #856404;
+    --alert-item-bg: #FFFFFF;
+}
+
+/* 4. ソフトグリーン */
+:root[data-theme="soft-green"] {
+    --primary-color: #5A8F7B;
+    --secondary-color: #73A598;
+    --background-color: #F1F8F5;
+    --card-color: #FFFFFF;
+    --text-color: #2D4A3E;
+    --text-secondary: #5A8F7B;
+    --text-muted: #8DB3A4;
+    --border-color: #D9EBE3;
+    --gradient-start: #5A8F7B;
+    --gradient-end: #73A598;
+    --alert-bg: #FFF3CD;
+    --alert-border: #FFC107;
+    --alert-text: #856404;
+    --alert-item-bg: #FFFFFF;
+}
+
+/* 5. ウォームグレー */
+:root[data-theme="warm-gray"] {
+    --primary-color: #7D6B5D;
+    --secondary-color: #998577;
+    --background-color: #FAF7F5;
+    --card-color: #FFFFFF;
+    --text-color: #3E352E;
+    --text-secondary: #7D6B5D;
+    --text-muted: #B5A193;
+    --border-color: #E8DFD7;
+    --gradient-start: #7D6B5D;
+    --gradient-end: #998577;
+    --alert-bg: #FFF3CD;
+    --alert-border: #FFC107;
+    --alert-text: #856404;
+    --alert-item-bg: #FFFFFF;
+}
+
+/* 6. ミニマルグレー */
+:root[data-theme="minimal-gray"] {
+    --primary-color: #4A5568;
+    --secondary-color: #718096;
+    --background-color: #F7FAFC;
+    --card-color: #FFFFFF;
+    --text-color: #1A202C;
+    --text-secondary: #4A5568;
+    --text-muted: #A0AEC0;
+    --border-color: #E2E8F0;
+    --gradient-start: #4A5568;
+    --gradient-end: #718096;
+    --alert-bg: #FFF3CD;
+    --alert-border: #FFC107;
+    --alert-text: #856404;
+    --alert-item-bg: #FFFFFF;
+}
+
+/* 7. ダークモード（完全修正版） */
+:root[data-theme="dark"] {
+    --primary-color: #8AB4F8;
+    --secondary-color: #A8C7FA;
+    --background-color: #121212;
+    --card-color: #1E1E1E;
+    --text-color: #E8EAED;
+    --text-secondary: #BDC1C6;
+    --text-muted: #9AA0A6;
+    --border-color: #3C4043;
+    --gradient-start: #2C2C2C;
+    --gradient-end: #1E1E1E;
+    
+    /* ダークモード用の特別な色 */
+    --error-color: #F28B82;
+    --warning-color: #FDD663;
+    --success-color: #81C995;
+    
+    /* アラート用の色（ダークモード専用） */
+    --alert-bg: #2C2410;
+    --alert-border: #5C4A1F;
+    --alert-text: #FDD663;
+    --alert-item-bg: #3C3420;
+}
+
+/* デフォルトの共通カラー（ライトモード用） */
+:root {
+    --error-color: #D32F2F;
+    --warning-color: #F57C00;
+    --success-color: #388E3C;
+    --alert-bg: #FFF3CD;
+    --alert-border: #FFC107;
+    --alert-text: #856404;
+    --alert-item-bg: #FFFFFF;
+}
+
+/* ===================================
+   テーマ適用
+   =================================== */
+
+body {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    color: var(--text-color);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    background: var(--card-color);
+}
+
+header {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+}
+
+.summary-section {
+    background: var(--background-color);
+}
+
+.summary-card {
+    background: var(--card-color);
+    color: var(--text-color);
+}
+
+.summary-card h2 {
+    color: var(--text-secondary);
+}
+
+.amount-display,
+.count-display {
+    color: var(--primary-color);
+}
+
+.note {
+    color: var(--text-muted);
+}
+
+.add-cert-section,
+.cert-list-section,
+.master-section {
+    background: var(--card-color);
+}
+
+.cert-list-section {
+    background: var(--background-color);
+}
+
+.cert-card {
+    background: var(--card-color);
+    border-color: var(--border-color);
+}
+
+.cert-info h3 {
+    color: var(--text-color);
+}
+
+.category {
+    background: var(--primary-color);
+    color: white;
+}
+
+.detail-label {
+    color: var(--text-muted);
+}
+
+.detail-value {
+    color: var(--text-color);
+}
+
+.filter-btn {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background: var(--card-color);
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.form-group select,
+.form-group input {
+    border-color: var(--border-color);
+    background: var(--card-color);
+    color: var(--text-color);
+}
+
+.form-group select:focus,
+.form-group input:focus {
+    border-color: var(--primary-color);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+}
+
+.master-table thead {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+}
+
+.master-table tbody tr {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.master-table tbody tr:hover {
+    background: var(--background-color);
+}
+
+.master-table td {
+    color: var(--text-color);
+}
+
+footer {
+    background: var(--background-color);
+    border-top: 1px solid var(--border-color);
+}
+
+footer p {
+    color: var(--text-secondary);
+}
+
+/* ダークモード固有の調整 */
+:root[data-theme="dark"] .empty-message {
+    color: var(--text-muted);
+}
+
+:root[data-theme="dark"] .cert-card {
+    border: 1px solid var(--border-color);
+}
+
+:root[data-theme="dark"] input::placeholder {
+    color: var(--text-muted);
+}
+
+:root[data-theme="dark"] .master-table tbody tr.acquired {
+    background: #1F3A2C;
+}
+
+/* エラー・警告の色調整 */
+.cert-card.expired {
+    border-left-color: var(--error-color);
+}
+
+.cert-card.expiring {
+    border-left-color: var(--warning-color);
+}
+
+.detail-value.expired,
+.detail-badge.expired {
+    color: var(--error-color);
+}
+
+.detail-value.expiring,
+.detail-badge.expiring {
+    color: var(--warning-color);
+}
+
+.alert-card .count-display {
+    color: var(--error-color);
+}
+
+/* 通知設定モーダル（ダークモード） */
+:root[data-theme="dark"] .notification-section {
+    background: var(--card-color);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+:root[data-theme="dark"] .notification-section.test-section {
+    background: #1a2332;
+    border-color: #2c3e50;
+}
+
+:root[data-theme="dark"] .notification-desc,
+:root[data-theme="dark"] .notification-list {
+    color: var(--text-secondary);
+}
+
+:root[data-theme="dark"] .notification-note {
+    color: var(--text-muted);
+}
+
+:root[data-theme="dark"] .salary-day-selector {
+    background: var(--background-color);
+}

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>資格手当管理アプリ</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="themes.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div>
+                    <h1>資格手当管理アプリ</h1>
+                    <p class="subtitle">取得資格と手当を管理しましょう</p>
+                </div>
+                <button class="theme-btn" id="notificationBtn" title="通知設定">
+                    🔔
+                </button>
+                <button class="theme-btn" id="themeBtn" title="テーマを変更">
+                    🎨
+                </button>
+            </div>
+        </header>
+
+        <!-- 通知設定モーダル -->
+        <div class="theme-modal" id="notificationModal">
+            <div class="theme-modal-content">
+                <div class="theme-modal-header">
+                    <h2>通知設定</h2>
+                    <button class="theme-modal-close" id="closeNotificationModal">×</button>
+                </div>
+                <div class="notification-settings">
+                    <!-- 通知許可 -->
+                    <div class="notification-section">
+                        <div class="notification-header">
+                            <span class="notification-icon">🔔</span>
+                            <h3>通知許可</h3>
+                        </div>
+                        <p class="notification-desc">ブラウザの通知を受け取るには許可が必要です。</p>
+                        <button class="btn-primary" id="requestPermissionBtn">通知許可を確認</button>
+                        <p class="notification-status" id="permissionStatus"></p>
+                    </div>
+
+                    <!-- 通知機能の有効化 -->
+                    <div class="notification-section">
+                        <div class="notification-header">
+                            <label class="switch-label">
+                                <input type="checkbox" id="notificationEnabled" class="notification-switch">
+                                <span class="switch-slider"></span>
+                                <span class="switch-text">通知機能を有効化</span>
+                            </label>
+                        </div>
+                        <p class="notification-desc">すべての通知機能を一括で有効/無効にします。</p>
+                    </div>
+
+                    <!-- 給料日通知 -->
+                    <div class="notification-section">
+                        <div class="notification-header">
+                            <span class="notification-icon">💰</span>
+                            <h3>給料日通知</h3>
+                            <label class="switch-label-small">
+                                <input type="checkbox" id="salaryDayEnabled" class="notification-switch">
+                                <span class="switch-slider-small"></span>
+                            </label>
+                        </div>
+                        <p class="notification-desc">毎月指定した日に資格手当の金額を通知します。</p>
+                        <div class="salary-day-selector">
+                            <label>給料日: <span id="salaryDayValue">25</span>日</label>
+                            <input type="range" id="salaryDaySlider" min="1" max="31" value="25" class="day-slider">
+                        </div>
+                        <p class="notification-note">※ブラウザを開いた時にチェックされます</p>
+                    </div>
+
+                    <!-- 資格更新通知 -->
+                    <div class="notification-section">
+                        <div class="notification-header">
+                            <span class="notification-icon">📝</span>
+                            <h3>資格更新通知</h3>
+                            <label class="switch-label-small">
+                                <input type="checkbox" id="renewalEnabled" class="notification-switch">
+                                <span class="switch-slider-small"></span>
+                            </label>
+                        </div>
+                        <p class="notification-desc">資格の更新可能期間や期限が近づいたら通知します。</p>
+                        <ul class="notification-list">
+                            <li>更新可能期間になった時</li>
+                            <li>期限1ヶ月前</li>
+                            <li>期限1週間前</li>
+                            <li>期限前日</li>
+                        </ul>
+                    </div>
+
+                    <!-- テスト通知 -->
+                    <div class="notification-section test-section">
+                        <div class="notification-header">
+                            <h3>テスト通知</h3>
+                        </div>
+                        <p class="notification-desc">通知機能が正常に動作するかテストできます。</p>
+                        <button class="btn-primary" id="testNotificationBtn">テスト通知を送信</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- テーマ選択モーダル -->
+        <div class="theme-modal" id="themeModal">
+            <div class="theme-modal-content">
+                <div class="theme-modal-header">
+                    <h2>カラーテーマを選択</h2>
+                    <button class="theme-modal-close" id="closeModal">×</button>
+                </div>
+                <div class="theme-options">
+                    <button class="theme-option" data-theme="light">
+                        <div class="theme-preview light-preview"></div>
+                        <span>ライト</span>
+                        <span class="theme-desc">シンプル・ブルーグレー</span>
+                    </button>
+                    <button class="theme-option" data-theme="neutral-gray">
+                        <div class="theme-preview neutral-gray-preview"></div>
+                        <span>ニュートラルグレー</span>
+                        <span class="theme-desc">Google風シンプル</span>
+                    </button>
+                    <button class="theme-option" data-theme="soft-blue">
+                        <div class="theme-preview soft-blue-preview"></div>
+                        <span>ソフトブルー</span>
+                        <span class="theme-desc">落ち着いた青</span>
+                    </button>
+                    <button class="theme-option" data-theme="soft-green">
+                        <div class="theme-preview soft-green-preview"></div>
+                        <span>ソフトグリーン</span>
+                        <span class="theme-desc">優しい緑</span>
+                    </button>
+                    <button class="theme-option" data-theme="warm-gray">
+                        <div class="theme-preview warm-gray-preview"></div>
+                        <span>ウォームグレー</span>
+                        <span class="theme-desc">温かみのあるグレー</span>
+                    </button>
+                    <button class="theme-option" data-theme="minimal-gray">
+                        <div class="theme-preview minimal-gray-preview"></div>
+                        <span>ミニマルグレー</span>
+                        <span class="theme-desc">最小限の色使い</span>
+                    </button>
+                    <button class="theme-option" data-theme="dark">
+                        <div class="theme-preview dark-preview"></div>
+                        <span>ダークモード</span>
+                        <span class="theme-desc">目に優しい暗色</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- サマリーセクション -->
+        <section class="summary-section">
+            <div class="summary-card">
+                <h2>月額手当合計</h2>
+                <div class="amount-display" id="totalAllowance">¥0</div>
+                <p class="note">上限: ¥100,000</p>
+            </div>
+            <div class="summary-card">
+                <h2>取得資格数</h2>
+                <div class="count-display" id="certCount">0</div>
+                <p class="note">資格</p>
+            </div>
+            <div class="summary-card alert-card">
+                <h2>更新必要</h2>
+                <div class="count-display" id="expiringCount">0</div>
+                <p class="note">資格</p>
+            </div>
+        </section>
+
+        <!-- アラートセクション -->
+        <section class="alert-section" id="alertSection" style="display: none;">
+            <div class="alert-box">
+                <h3>⚠️ 更新が必要な資格があります</h3>
+                <ul id="alertList"></ul>
+            </div>
+        </section>
+
+        <!-- 資格追加セクション -->
+        <section class="add-cert-section">
+            <h2>資格を追加</h2>
+            <div class="form-container">
+                <div class="form-group">
+                    <label for="certSelect">資格を選択</label>
+                    <select id="certSelect">
+                        <option value="">資格を選択してください</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="acquireDate">取得日</label>
+                    <input type="date" id="acquireDate" required>
+                </div>
+                <button class="btn-primary" id="addCertBtn">資格を追加</button>
+            </div>
+        </section>
+
+        <!-- 取得済み資格一覧 -->
+        <section class="cert-list-section">
+            <h2>取得済み資格一覧</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">すべて</button>
+                <button class="filter-btn" data-filter="expiring">更新必要</button>
+                <button class="filter-btn" data-filter="valid">有効</button>
+            </div>
+            <div id="certListContainer">
+                <p class="empty-message">まだ資格が登録されていません。</p>
+            </div>
+        </section>
+
+        <!-- 資格マスター表示セクション -->
+        <section class="master-section">
+            <h2>対象資格一覧</h2>
+            <div class="table-container">
+                <table class="master-table" id="masterTable">
+                    <thead>
+                        <tr>
+                            <th>資格名</th>
+                            <th>カテゴリ</th>
+                            <th>月額手当</th>
+                            <th>有効期限</th>
+                        </tr>
+                    </thead>
+                    <tbody id="masterTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 資格手当管理アプリ</p>
+            <button class="btn-danger" id="resetDataBtn">データをリセット</button>
+        </footer>
+    </div>
+
+    <script src="notification.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
