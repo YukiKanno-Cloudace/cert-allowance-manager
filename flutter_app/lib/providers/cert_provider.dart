@@ -134,16 +134,10 @@ class CertProvider with ChangeNotifier {
   /// 月額手当の合計を計算（上限10万円）
   /// ※期限切れの資格は除外
   int getTotalAllowance() {
-    return getTotalAllowanceAsOfDate(DateTime.now());
-  }
-
-  /// 指定日時点での月額手当の合計を計算（上限10万円）
-  /// ※指定日時点で期限切れの資格は除外
-  int getTotalAllowanceAsOfDate(DateTime date) {
     int total = 0;
     for (final acquiredCert in _acquiredCerts) {
-      // 指定日時点で期限切れの資格は除外
-      if (acquiredCert.expiryDate.isBefore(date)) {
+      // 期限切れの資格は除外
+      if (acquiredCert.isExpired) {
         continue;
       }
       
@@ -153,24 +147,6 @@ class CertProvider with ChangeNotifier {
       }
     }
     return total > 100000 ? 100000 : total;
-  }
-
-  /// 次回給料日（来月25日）に支給される手当額を計算
-  /// = 前月末時点で有効な資格の合計
-  int getNextSalaryAllowance() {
-    final now = DateTime.now();
-    // 前月末を計算
-    final lastMonthEnd = DateTime(now.year, now.month, 0, 23, 59, 59);
-    return getTotalAllowanceAsOfDate(lastMonthEnd);
-  }
-
-  /// 次々回給料日（再来月25日）に支給される手当額を計算
-  /// = 今月末時点で有効な資格の合計
-  int getFollowingSalaryAllowance() {
-    final now = DateTime.now();
-    // 今月末を計算
-    final thisMonthEnd = DateTime(now.year, now.month + 1, 0, 23, 59, 59);
-    return getTotalAllowanceAsOfDate(thisMonthEnd);
   }
 
   /// 更新が必要な資格の数を取得
@@ -190,5 +166,57 @@ class CertProvider with ChangeNotifier {
 
   /// 取得済み資格数を取得
   int get acquiredCertsCount => _acquiredCerts.length;
+
+  /// 今月支給の手当を計算（先月末までに取得した資格のみ）
+  int getCurrentMonthSalaryAllowance() {
+    final now = DateTime.now();
+    // 今月1日の0時0分
+    final thisMonthStart = DateTime(now.year, now.month, 1);
+    
+    int total = 0;
+    for (final acquiredCert in _acquiredCerts) {
+      // 期限切れの資格は除外
+      if (acquiredCert.isExpired) {
+        continue;
+      }
+      
+      // 今月取得した資格は除外（先月末までに取得した資格のみ）
+      if (acquiredCert.acquiredDate.isBefore(thisMonthStart)) {
+        final cert = CertificationData.getCertificationById(acquiredCert.certId);
+        if (cert != null) {
+          total += cert.allowance;
+        }
+      }
+    }
+    return total > 100000 ? 100000 : total;
+  }
+
+  /// 来月支給の手当を計算（今月末までに取得した資格すべて）
+  int getNextMonthSalaryAllowance() {
+    final now = DateTime.now();
+    // 来月1日の0時0分
+    final nextMonthStart = DateTime(
+      now.month == 12 ? now.year + 1 : now.year,
+      now.month == 12 ? 1 : now.month + 1,
+      1,
+    );
+    
+    int total = 0;
+    for (final acquiredCert in _acquiredCerts) {
+      // 期限切れの資格は除外
+      if (acquiredCert.isExpired) {
+        continue;
+      }
+      
+      // 来月取得予定の資格は除外（今月末までに取得した資格のみ）
+      if (acquiredCert.acquiredDate.isBefore(nextMonthStart)) {
+        final cert = CertificationData.getCertificationById(acquiredCert.certId);
+        if (cert != null) {
+          total += cert.allowance;
+        }
+      }
+    }
+    return total > 100000 ? 100000 : total;
+  }
 }
 

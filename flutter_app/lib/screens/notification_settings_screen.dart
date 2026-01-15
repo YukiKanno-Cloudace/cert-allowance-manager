@@ -35,7 +35,7 @@ class _NotificationSettingsScreenState
           }
 
           final settings = notificationProvider.settings;
-          final totalAllowance = certProvider.getNextSalaryAllowance();
+          final totalAllowance = certProvider.getNextMonthSalaryAllowance();
 
           return ListView(
             padding: const EdgeInsets.all(16),

@@ -75,14 +75,14 @@ class SummaryCard extends StatelessWidget {
 
 /// 金額表示用のサマリーカード
 class AllowanceSummaryCard extends StatelessWidget {
+  final int currentAmount;
   final int nextAmount;
-  final int followingAmount;
   final int maxAmount;
 
   const AllowanceSummaryCard({
     super.key,
+    required this.currentAmount,
     required this.nextAmount,
-    required this.followingAmount,
     this.maxAmount = 100000,
   });
 
@@ -91,17 +91,13 @@ class AllowanceSummaryCard extends StatelessWidget {
     final formatter = NumberFormat('#,###');
     final now = DateTime.now();
     
-    // 次回給料日（来月25日）
+    // 今月の給料日（今月25日）
+    final currentSalaryDate = DateTime(now.year, now.month, 25);
+    
+    // 来月の給料日（来月25日）
     final nextSalaryDate = DateTime(
       now.month == 12 ? now.year + 1 : now.year,
       now.month == 12 ? 1 : now.month + 1,
-      25,
-    );
-    
-    // 次々回給料日（再来月25日）
-    final followingSalaryDate = DateTime(
-      nextSalaryDate.month == 12 ? nextSalaryDate.year + 1 : nextSalaryDate.year,
-      nextSalaryDate.month == 12 ? 1 : nextSalaryDate.month + 1,
       25,
     );
 
@@ -131,11 +127,11 @@ class AllowanceSummaryCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            // 次回支給額
+            // 今月支給額
             Column(
               children: [
                 Text(
-                  '次回支給 (${nextSalaryDate.month}/${nextSalaryDate.day})',
+                  '今月支給 (${currentSalaryDate.month}/${currentSalaryDate.day})',
                   style: AppTheme.captionStyle.copyWith(
                     fontSize: 12,
                     color: Colors.grey[600],
@@ -143,7 +139,7 @@ class AllowanceSummaryCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '¥${formatter.format(nextAmount)}',
+                  '¥${formatter.format(currentAmount)}',
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
@@ -155,11 +151,11 @@ class AllowanceSummaryCard extends StatelessWidget {
             const SizedBox(height: 16),
             const Divider(),
             const SizedBox(height: 16),
-            // 次々回支給額
+            // 来月支給額
             Column(
               children: [
                 Text(
-                  '次々回支給 (${followingSalaryDate.month}/${followingSalaryDate.day})',
+                  '来月支給 (${nextSalaryDate.month}/${nextSalaryDate.day})',
                   style: AppTheme.captionStyle.copyWith(
                     fontSize: 12,
                     color: Colors.grey[600],
@@ -167,7 +163,7 @@ class AllowanceSummaryCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '¥${formatter.format(followingAmount)}',
+                  '¥${formatter.format(nextAmount)}',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,

@@ -200,8 +200,8 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Expanded(
                   child: AllowanceSummaryCard(
-                    nextAmount: provider.getNextSalaryAllowance(),
-                    followingAmount: provider.getFollowingSalaryAllowance(),
+                    currentAmount: provider.getCurrentMonthSalaryAllowance(),
+                    nextAmount: provider.getNextMonthSalaryAllowance(),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -223,8 +223,8 @@ class _HomeScreenState extends State<HomeScreen> {
             return Column(
               children: [
                 AllowanceSummaryCard(
-                  nextAmount: provider.getNextSalaryAllowance(),
-                  followingAmount: provider.getFollowingSalaryAllowance(),
+                  currentAmount: provider.getCurrentMonthSalaryAllowance(),
+                  nextAmount: provider.getNextMonthSalaryAllowance(),
                 ),
                 const SizedBox(height: 16),
                 Row(

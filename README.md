@@ -13,15 +13,16 @@
 
 ## スクリーンショット
 
-| Web版 | Flutter版（モバイル） | Flutter版（デスクトップ） |
-|-------|-------------------|---------------------|
-| ブラウザで動作 | iOS/Android対応 | macOS/Windows/Linux対応 |
+| Web版          | Flutter版（モバイル） | Flutter版（デスクトップ） |
+| -------------- | --------------------- | ------------------------- |
+| ブラウザで動作 | iOS/Android対応       | macOS/Windows/Linux対応   |
 
 ## 対応資格（全18資格）
 
 ### Google Cloud認証（15資格）
 
 #### Associate レベル（月額 ¥5,000 / 有効期限 3年）
+
 - Cloud Digital Leader
 - Generative AI Leader
 - Associate Cloud Engineer
@@ -29,6 +30,7 @@
 - Associate Data Practitioner
 
 #### Professional レベル（月額 ¥10,000 / 有効期限 2年）
+
 - Professional Cloud Architect
 - Professional Database Engineer
 - Professional Cloud Developer
@@ -40,20 +42,24 @@
 - Professional Security Operations Engineer
 
 #### Chrome OS（月額 ¥5,000 / 有効期限 3年）
+
 - Professional ChromeOS Administrator
 
 ### その他の認証（3資格）
 
 #### CNCF Kubernetes（月額 ¥10,000 / 有効期限 3年）
+
 - Certified Kubernetes Administrator (CKA)
 - Certified Kubernetes Application Developer (CKAD)
 
 #### PMI（月額 ¥10,000 / 有効期限 3年）
+
 - Project Management Professional (PMP)
 
 ## 機能一覧
 
 ### 共通機能（Web版・Flutter版）
+
 - ✅ 資格の取得日記録と有効期限の自動計算
 - ✅ 月額手当の自動集計（上限10万円）
 - ✅ 有効期限アラート表示（90日以内）
@@ -63,6 +69,7 @@
 - ✅ ダークモード対応
 
 ### Flutter版の追加機能
+
 - 🔔 **バックグラウンド通知対応**（アプリを閉じていても通知が届く）
 - 📅 給料日通知（毎月指定日の午前9時）
 - 📝 資格更新通知（更新可能期間、1ヶ月前、1週間前、前日）
@@ -74,10 +81,12 @@
 ### Web版
 
 #### 必要なもの
+
 - モダンなWebブラウザ（Chrome、Firefox、Safari、Edge）
 - Python 3（ローカルサーバー用）
 
 #### 実行方法
+
 ```bash
 # リポジトリをクローン
 git clone git@github.com:YukiKanno-Cloudace/cert-allowance-manager.git
@@ -93,10 +102,12 @@ python3 -m http.server 8000
 ### Flutter版
 
 #### 必要なもの
+
 - Flutter SDK 3.0以上
 - Dart SDK 3.0以上
 
 #### セットアップ
+
 ```bash
 cd flutter_app
 
@@ -108,6 +119,7 @@ flutter run
 ```
 
 #### プラットフォーム別ビルド
+
 ```bash
 # Android APK
 flutter build apk --release
@@ -162,12 +174,14 @@ cert-allowance-manager/
 ## 技術スタック
 
 ### Web版
+
 - **フロントエンド**: HTML5, CSS3, Vanilla JavaScript (ES6+)
 - **データ永続化**: LocalStorage
 - **通知**: Web Notifications API
 - **スタイリング**: CSS Custom Properties（テーマ管理）
 
 ### Flutter版
+
 - **フレームワーク**: Flutter 3.x
 - **言語**: Dart 3.x
 - **状態管理**: Provider
@@ -191,17 +205,20 @@ cert-allowance-manager/
 ## 通知機能の詳細
 
 ### Web版
+
 - ブラウザのWeb Notifications APIを使用
 - ブラウザを開いている時のみ通知が届く
 - 給料日通知と資格更新通知に対応
 
 ### Flutter版（Android/iOS/macOS等）
+
 - **完全なバックグラウンド通知対応**
 - アプリを完全に終了していても通知が届く
 - プラットフォームネイティブの通知センターに統合
 - 正確な時刻にスケジュール通知
 
 #### 通知の種類
+
 - 📅 **給料日通知**: 毎月指定日の午前9時に手当合計を通知
 - 🔄 **更新可能通知**: 有効期限の180日前（更新可能期間開始時）
 - ⚠️ **期限アラート**: 1ヶ月前、1週間前、前日に通知
@@ -210,11 +227,13 @@ cert-allowance-manager/
 ## データ管理
 
 ### Web版
+
 - **LocalStorage**を使用
 - ブラウザごとに独立してデータを保存
 - ブラウザのキャッシュクリアでデータが削除される
 
 ### Flutter版
+
 - **SQLite**データベースを使用
 - アプリごとに独立した永続的なデータベース
 - アンインストール時にデータが削除される
@@ -222,12 +241,14 @@ cert-allowance-manager/
 ## 開発
 
 ### Web版の開発
+
 ```bash
 # ファイルを編集後、ブラウザをリロードするだけ
 # ローカルサーバーが起動していれば即座に反映
 ```
 
 ### Flutter版の開発
+
 ```bash
 cd flutter_app
 
@@ -246,10 +267,12 @@ flutter analyze
 ## トラブルシューティング
 
 ### Web版
+
 - **通知が届かない**: ブラウザの通知許可を確認してください
 - **データが消えた**: ブラウザのキャッシュクリアが原因です。定期的にバックアップをお勧めします
 
 ### Flutter版
+
 - **ビルドエラー**: `flutter clean && flutter pub get` を実行してください
 - **通知が届かない**: システムの通知設定を確認してください
   - Android: 設定 → アプリ → 通知
@@ -267,6 +290,7 @@ flutter analyze
 ## 今後の拡張可能性
 
 ### 機能拡張
+
 - [ ] カスタムリマインダーの完全実装
 - [ ] データのエクスポート/インポート機能
 - [ ] 複数ユーザー対応
@@ -274,6 +298,7 @@ flutter analyze
 - [ ] 資格取得履歴の統計表示
 
 ### プラットフォーム拡張
+
 - [ ] iOS版のビルドと配布
 - [ ] Windows版のビルドと配布
 - [ ] Linux版のビルドと配布
@@ -292,3 +317,7 @@ flutter analyze
 ---
 
 **最終更新**: 2026年01月05日
+
+
+
+
